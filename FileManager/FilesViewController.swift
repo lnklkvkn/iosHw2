@@ -9,7 +9,7 @@ import UIKit
 import PhotosUI
 import Photos
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
+class FilesViewController: UIViewController,  UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, PHPickerViewControllerDelegate {
     
     var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     
@@ -35,7 +35,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         view.backgroundColor = .orange
         setupView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewFile))
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewFile))
     }
 
     @objc func addNewFile(){
