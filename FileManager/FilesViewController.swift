@@ -9,11 +9,12 @@ import UIKit
 import PhotosUI
 import Photos
 
+
 class FilesViewController: UIViewController,  UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, PHPickerViewControllerDelegate {
     
     var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     
-    private var files : [String] {
+    var files: [String] {
         do {
             return try FileManager.default.contentsOfDirectory(atPath: path)
         }
@@ -35,12 +36,24 @@ class FilesViewController: UIViewController,  UINavigationControllerDelegate, UI
         super.viewDidLoad()
         view.backgroundColor = .orange
         setupView()
-
+        UserDefaults.standard.set("AZ", forKey: "sorting")
+        NotificationCenter.default.addObserver(self, selector: #selector(doAfterNotified), name: NSNotification.Name("sort"), object: nil)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewFile))
     }
 
-    @objc func addNewFile(){
+    @objc private func doAfterNotified() {
         
+        let group = DispatchGroup()
+        group.enter()
+        print("****** ПРИШЛО УВЕДОМЛЕНИЕ О СОРТИРОВКЕ ********")
+        group.leave()
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
+    }
+    
+     @objc func addNewFile() {
+
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.selectionLimit = 10
         let vc = PHPickerViewController(configuration: configuration)
@@ -106,9 +119,40 @@ class FilesViewController: UIViewController,  UINavigationControllerDelegate, UI
         return files.count
     }
     
+    var isSortedAZ: Bool {
+        if UserDefaults.standard.string(forKey: "sorting") == "AZ" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var isSortedZA: Bool {
+        if UserDefaults.standard.string(forKey: "sorting") == "ZA" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func sortFiles() -> [String] {
+        var sortedFiles : [String]
+        if isSortedAZ {
+            sortedFiles = files.sorted(by: { (s1: String, s2: String) -> Bool in return s1 < s2})
+        } else if isSortedZA{
+            sortedFiles = files.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2})
+        } else {
+            sortedFiles = files
+        }
+        return sortedFiles
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
-        cell.textLabel?.text = String(indexPath.row + 1) + ".   " + self.files[indexPath.row]
+
+        let sortedFiles = sortFiles()
+        
+        cell.textLabel?.text = String(indexPath.row + 1) + ".   " + sortedFiles[indexPath.row]
         return cell
     }
 
@@ -116,8 +160,8 @@ class FilesViewController: UIViewController,  UINavigationControllerDelegate, UI
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
             let manager = FileManager.default
-            let files = self.files
-            let pathForDel = self.path + "/" + files[indexPath.row]
+            let sortedFiles = self.sortFiles()
+            let pathForDel = self.path + "/" + sortedFiles[indexPath.row]
             let group = DispatchGroup()
             group.enter()
             do {
@@ -142,3 +186,4 @@ class FilesViewController: UIViewController,  UINavigationControllerDelegate, UI
 }
 
 class TableViewCell: UITableViewCell { }
+

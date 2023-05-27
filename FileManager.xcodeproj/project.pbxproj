@@ -10,6 +10,7 @@
 		FD2F0DEC29F4B0BF00C9BE82 /* AlertExtencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F0DEB29F4B0BF00C9BE82 /* AlertExtencion.swift */; };
 		FD2F0DEE29F4B3C000C9BE82 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F0DED29F4B3C000C9BE82 /* SettingsViewController.swift */; };
 		FD2F0DF129F4CE8900C9BE82 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = FD2F0DF029F4CE8900C9BE82 /* KeychainAccess */; };
+		FD2F0DF329F5A0BC00C9BE82 /* PasswordChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F0DF229F5A0BC00C9BE82 /* PasswordChangeVC.swift */; };
 		FD8BD1C329E46FEB00475570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8BD1C229E46FEB00475570 /* AppDelegate.swift */; };
 		FD8BD1C529E46FEB00475570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8BD1C429E46FEB00475570 /* SceneDelegate.swift */; };
 		FD8BD1C729E46FEB00475570 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8BD1C629E46FEB00475570 /* FilesViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		FD2F0DEB29F4B0BF00C9BE82 /* AlertExtencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtencion.swift; sourceTree = "<group>"; };
 		FD2F0DED29F4B3C000C9BE82 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FD2F0DF229F5A0BC00C9BE82 /* PasswordChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeVC.swift; sourceTree = "<group>"; };
 		FD8BD1BF29E46FEB00475570 /* FileManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8BD1C229E46FEB00475570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD8BD1C429E46FEB00475570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				FDAFE98629F0356600A9C7BC /* PasswordViewController.swift */,
 				FD8BD1C629E46FEB00475570 /* FilesViewController.swift */,
 				FD2F0DED29F4B3C000C9BE82 /* SettingsViewController.swift */,
+				FD2F0DF229F5A0BC00C9BE82 /* PasswordChangeVC.swift */,
 				FD2F0DEB29F4B0BF00C9BE82 /* AlertExtencion.swift */,
 				FD8BD1CB29E46FF700475570 /* Assets.xcassets */,
 				FD8BD1CD29E46FF700475570 /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 				FDAFE98729F0356600A9C7BC /* PasswordViewController.swift in Sources */,
 				FD8BD1C329E46FEB00475570 /* AppDelegate.swift in Sources */,
 				FD2F0DEC29F4B0BF00C9BE82 /* AlertExtencion.swift in Sources */,
+				FD2F0DF329F5A0BC00C9BE82 /* PasswordChangeVC.swift in Sources */,
 				FD8BD1C529E46FEB00475570 /* SceneDelegate.swift in Sources */,
 				FD2F0DEE29F4B3C000C9BE82 /* SettingsViewController.swift in Sources */,
 			);

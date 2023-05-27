@@ -8,7 +8,10 @@
 import UIKit
 import KeychainAccess
 
+
 class PasswordViewController: UIViewController {
+    
+    var keychain = Keychain()
     
     var appState = false {
         didSet {
@@ -56,9 +59,7 @@ class PasswordViewController: UIViewController {
             appState = true
         }
     }
-    
-    var keychain = Keychain()
-    
+
     @objc private func didTapLoginButton() {
         let pass = passwordTextField.text
         if pass?.count ?? 0 > 3 {
@@ -68,11 +69,14 @@ class PasswordViewController: UIViewController {
                 loginButton.setTitle("Введите пароль", for: .normal)
                 AlertErrorSample.shared.alert(title: "Успешно", message: "Пароль создан")
             } else if appState && pass == keychain["password"] {
-                let filesVC = FilesViewController()
+                
+                let filesVC = UINavigationController(rootViewController: FilesViewController())
                 let settVC = SettingsViewController()
                 let tabBarController = UITabBarController()
-    
                 tabBarController.viewControllers = [ filesVC , settVC]
+                tabBarController.viewControllers?[0].navigationController?.isNavigationBarHidden = true
+                self.navigationController?.isNavigationBarHidden = true
+                
                 tabBarController.viewControllers?.enumerated().forEach {
                     $1.tabBarItem.title = $0 == 0 ? "Files" : "Settings"
                     $1.tabBarItem.image = $0 == 0 ? UIImage(systemName: "list.bullet.clipboard") : UIImage(systemName: "gearshape.fill")
@@ -84,6 +88,7 @@ class PasswordViewController: UIViewController {
                 appState = false
                 AlertErrorSample.shared.alert(title: "Неверный пароль", message: "Пароль сброшен")
             }
+            
         } else if passwordTextField.text?.count ?? 0 < 4 {
             AlertErrorSample.shared.alert(title: "Ошибка", message: "Пароль должен состоять из 4 или более символов")
         } else {
